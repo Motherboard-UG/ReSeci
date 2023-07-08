@@ -6,7 +6,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.chains import create_extraction_chain
 
 # Load environment variables from .env file
-env_vars = dotenv_values()
+
 
 @jaseci_action(act_group=["langchain"], allow_remote=True)
 def llm_query(
