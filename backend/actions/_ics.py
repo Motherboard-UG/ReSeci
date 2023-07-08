@@ -28,7 +28,10 @@ def retrieve_all_meetings(events:set):
 
         
     
-def 
+def get_all_free_sloths(meeting_duration:int,meeting_period:int,events:list):
+    utc = arrow.utcnow()
+
+
 
 
 # query all meetings based on 

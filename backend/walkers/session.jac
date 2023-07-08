@@ -4,8 +4,7 @@
 
 walker create_session {
     has anchor id;
-    can rand.integer ;
-    can rand.word;
+ 
     has email;
     can utils.generate_uuid;
 

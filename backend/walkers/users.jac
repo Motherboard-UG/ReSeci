@@ -47,7 +47,7 @@ walker list_users {
             "user_id" : here.info['jid'],
             "name" : here.name,
             "email" : here.email,
-            "calendar" : here.calendar_link;
+            "calendar" : here.calendar_link
 
 
         };
@@ -75,7 +75,7 @@ walker update_user {
     user {
         if(name) : here.name = name;
         if(email): here.email = email;
-        if(calendar_link;) :here.calendar_link = calendar_link;
+        if(calendar_link): here.calendar_link = calendar_link;
         if(password): here.password = password;
 
         report {"success": true , "message":"Successfully updated user"};

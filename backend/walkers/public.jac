@@ -3,8 +3,8 @@ walker email_trigger {
    has meeting_hours;
    has meeting_duration;
    has payload = {
-      "sender" : "shiw@gmail.com";
-   }
+      "sender" : "shiw@gmail.com"
+   };
    has excluded = [];
    has included = [];
 
