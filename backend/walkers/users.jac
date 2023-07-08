@@ -25,7 +25,7 @@ walker add_user {
 
     users {
 
-        spawn here ++>node::user(name = name , email = email, access_token = access_token, password = password);
+        spawn here ++>node::user(name = name , email = email, calendar_link = calendar_link, password = password);
         report {"success": true , "message":"Successfully created user"};
 
 
