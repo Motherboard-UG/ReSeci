@@ -28,7 +28,7 @@ export default function usersIndex(){
           </tr>
         </thead>
         <tbody>
-        {users?.map((user) => (
+        {users.report?.map((user) => (
           <tr key={user.user_id}>
             <td>{user.name}</td>
             <td>{user.email}</td>

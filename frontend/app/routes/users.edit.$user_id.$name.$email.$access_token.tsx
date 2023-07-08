@@ -49,11 +49,11 @@ export default function usersEditRoute() {
         </Form.Group>
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="email" name="email" value={email} />
+          <Form.Control type="email" name="email" defaultValue={email} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="access_token">
           <Form.Label>Access Token</Form.Label>
-          <Form.Control type="text" name="access_token" value={access_token} />
+          <Form.Control type="text" name="access_token" defaultValue={access_token} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="password">
           <Form.Label>Password</Form.Label>

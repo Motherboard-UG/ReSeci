@@ -1,6 +1,15 @@
 import { Outlet } from "@remix-run/react";
-import { ActionArgs, redirect } from "@remix-run/node";
+import { ActionArgs, LoaderArgs, redirect } from "@remix-run/node";
 import { jaseciCall } from "~/models/http.server";
+import { authenticator } from "~/models/auth.server";
+
+export const loader = async ({request}: LoaderArgs) => {
+  const user = await authenticator.isAuthenticated(request, {
+      failureRedirect: "/login",
+  });
+
+  return user;
+}
 
 export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
