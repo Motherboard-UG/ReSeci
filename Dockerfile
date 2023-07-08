@@ -19,6 +19,7 @@ RUN apt-get update
 # RUN pip install jac_misc[cluster]
 
 RUN jsserv makemigrations base
+RUN jsserv makemigrations
 RUN jsserv migrate base
 RUN jsserv migrate
 
