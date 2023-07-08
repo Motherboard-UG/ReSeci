@@ -1,0 +1,2 @@
+jac build main.jac
+sentinel register -set_active true -mode ir main.jir

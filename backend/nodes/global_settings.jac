@@ -11,9 +11,7 @@ walker get_global_settings {
     app: take -->node::global_settings;
 
     global_settings {
-        report {
-            "future_period" : here.future_period
-        };
+        report here.future_period;
     }
 
 }

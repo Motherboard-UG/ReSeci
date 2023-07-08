@@ -1,0 +1,5 @@
+jac build main.jac
+actions load local actions/langchain.py
+actions load local actions/utils.py
+actions load local actions/\_ics.py
+sentinel set -snt active:sentinel -mode ir main.jir

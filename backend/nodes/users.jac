@@ -3,7 +3,8 @@ node users;
 node user {
     has email;
     has name;
-    has access_token;
+    has calendar_link;
     has password;
+    has permission = true;
 }
 

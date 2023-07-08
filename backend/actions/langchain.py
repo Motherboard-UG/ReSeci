@@ -5,7 +5,7 @@ from langchain.chains import create_extraction_chain
 
 
 @jaseci_action(act_group=["langchain"], allow_remote=True)
-def extract_entities(text: str = None):
+def extract_entities(text):
     
     provider = "openai" 
     model_name = "gpt-3.5-turbo-0613" 

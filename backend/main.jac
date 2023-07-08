@@ -14,6 +14,7 @@ import {*} with './walkers/emails.jac';
 import {*} with './walkers/logs.jac';
 import {*} with './walkers/session.jac';
 import {*} with './walkers/public.jac';
+import {*} with './walkers/send_email.jac';
 
 
 

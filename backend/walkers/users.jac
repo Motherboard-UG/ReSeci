@@ -6,7 +6,7 @@
 walker add_user {
     has name;
     has email;
-    has access_token;
+    has calendar_link;
     has password;
 
 
@@ -47,7 +47,8 @@ walker list_users {
             "user_id" : here.info['jid'],
             "name" : here.name,
             "email" : here.email,
-            "access_token" : here.access_token
+            "calendar" : here.calendar_link;
+
 
         };
     }
@@ -58,7 +59,7 @@ walker update_user {
     has user_id;
     has name;
     has email;
-    has access_token;
+    has calendar_link;
     has password;
 
 
@@ -74,7 +75,7 @@ walker update_user {
     user {
         if(name) : here.name = name;
         if(email): here.email = email;
-        if(access_token) : here.access_token = access_token;
+        if(calendar_link;) :here.calendar_link = calendar_link;
         if(password): here.password = password;
 
         report {"success": true , "message":"Successfully updated user"};
