@@ -1,4 +1,21 @@
 import { Form, Button } from "react-bootstrap";
+import { LoaderArgs, ActionFunction } from "@remix-run/node";
+import {authenticator} from "~/models/auth.server"
+
+export const loader = async ({request}: LoaderArgs) => {
+    const user = await authenticator.isAuthenticated(request, {
+        successRedirect: "/",
+    })
+
+    return user;
+}
+
+export const action: ActionFunction = async ({request}) => {
+    return authenticator.authenticate("form", request, {
+        successRedirect: "/",
+        failureRedirect: "/login",
+    })
+}
 
 export default function loginRoute(){
   return (
