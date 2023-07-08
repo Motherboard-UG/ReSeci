@@ -12,12 +12,12 @@ node log {
 walker add_log {
     has user_id = 0;
     has action;
-    can date.timestamp_now();
+    can date.timestamp_now;
 
 
-    root:: take -->node::app;
+    root:take -->node::app;
 
-    app:: take -->node::logs;
+    app:take -->node::logs;
 
     logs {
 
@@ -30,7 +30,7 @@ walker add_log {
                 user_id = user_id,
                 action = action,
                 timestamp = date.timestamp_now()
-            )
+            );
         }
 
         report {"success": true , "message":"Successfully added user settings"};
@@ -42,17 +42,17 @@ walker add_log {
 
 walker list_logs {
 
-    root: app-->node::app;
+    root: take -->node::app;
 
     app: take -->node::logs;
 
-    logs :: take -->node::log;
+    logs:take -->node::log;
 
     log {
         report {
             "user_id" : here.user_id,
             "action" : here.action,
             "timestamp" : here.timestamp
-        }
+        };
     }
 }

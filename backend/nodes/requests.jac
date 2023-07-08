@@ -32,7 +32,7 @@ walker add_request {
             disengage;
         }
 
-        spawn here ++>node::_request(
+        spawn here ++> node::_request(
             email = email,
             message_id = message_id,
             meeting_duration = meeting_duration,
