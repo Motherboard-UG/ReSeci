@@ -6,7 +6,7 @@ from difflib import get_close_matches
 @jaseci_action(act_group=["utils"], allow_remote=True)
 def generate_uuid():
     random_uuid =  uuid.uuid4()
-    return random_uuid
+    return str(random_uuid)
 
 
 @jaseci_action(act_group=["utils"], allow_remote=True)
