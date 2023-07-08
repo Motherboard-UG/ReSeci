@@ -4,7 +4,7 @@ services:
     container_name: sbm_backend
     build: .
     volumes:
-      - ./app:/app
+      - ./backend:/app
     ports:
       - "8000:8000"
 

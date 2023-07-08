@@ -4,7 +4,7 @@ FROM jaseci/jac-nlp:1.4.0.21
 # Set working directory. / is fine for most scenarios.
 WORKDIR /app
 
-COPY ./app /app
+COPY ./backend /app
 
 # Install any linux dependencies
 ENV DEBIAN_FRONTEND=nointeractive
