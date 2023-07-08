@@ -7,6 +7,14 @@ import {*} with './nodes/user_settings.jac';
 import {*} with './nodes/emails.jac';
 import {*} with './nodes/logs.jac';
 import {*} with './nodes/session.jac';
+import {*} with './walkers/users.jac';
+import {*} with './walkers/requests.jac';
+import {*} with './walkers/user_setting.jac';
+import {*} with './walkers/emails.jac';
+import {*} with './walkers/logs.jac';
+import {*} with './walkers/session.jac';
+import {*} with './walkers/public.jac';
+
 
 
 

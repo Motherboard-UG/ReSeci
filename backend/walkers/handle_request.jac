@@ -1,3 +1,0 @@
-walker handle_request {
-    
-}
