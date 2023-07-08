@@ -28,7 +28,7 @@ def retrieve_all_meetings(events:set):
 
         
     
-
+def 
 
 
 # query all meetings based on 
