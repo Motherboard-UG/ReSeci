@@ -22,5 +22,5 @@ export async function jaseciCall(endpoint:string,payload:object) {
     }
   ).then((res) => res.json());
 
-  return res.report;
+  return res;
 }

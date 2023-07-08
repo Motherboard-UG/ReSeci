@@ -6,7 +6,7 @@ import {
   LiveReload,
   Outlet,
 } from "@remix-run/react"
-import { Navbar, Nav, Container } from "react-bootstrap"
+import { Navbar, Nav, Container, Form, Button } from "react-bootstrap"
 import bootstrapCSS from "bootstrap/dist/css/bootstrap.min.css"
 import globalStylesUrl from '~/styles/global.css'
 
@@ -58,6 +58,11 @@ function Layout({ children }) {
               <Link to='/reports' className="nav-link">Reports</Link>
               <Link to='/users' className="nav-link">Users</Link>
               <Link to='/settings' className="nav-link">Settings</Link>
+              <Form action="/logout" method="post">
+                <Button type="submit" variant="outline-light" className="mt-1" size="sm">
+                  Logout
+                </Button>
+              </Form>
             </Nav>
           </Navbar.Collapse>
         </Container>
