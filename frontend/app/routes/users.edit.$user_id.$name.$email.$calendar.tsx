@@ -3,13 +3,17 @@ import { ActionArgs, redirect } from "@remix-run/node";
 import { jaseciCall } from "~/models/http.server";
 import { useParams } from "@remix-run/react";
 
+export const loader = async () => {
+  return null;
+}
+
 export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
 
   const form_user_id = formData.get("user_id");
   const form_name = formData.get("name");
   const form_email = formData.get("email");
-  const form_access_token = formData.get("access_token");
+  const form_calendar = formData.get("calendar");
   const form_password = formData.get("password");
 
   var user_fields = {};
@@ -19,14 +23,14 @@ export const action = async ({ request }: ActionArgs) => {
       user_id: form_user_id,
       name: form_name,
       email: form_email,
-      access_token: form_access_token,
+      calendar_link: form_calendar,
     }
   } else {
     user_fields = {
       user_id: form_user_id,
       name: form_name,
       email: form_email,
-      access_token: form_access_token,
+      calendar_link: form_calendar,
       password: form_password
     }
   }
@@ -37,7 +41,7 @@ export const action = async ({ request }: ActionArgs) => {
 };
 
 export default function usersEditRoute() {
-  const { user_id, name, email, access_token } = useParams();
+  const { user_id, name, email, calendar } = useParams();
 
   return (
     <div className="row justify-content-md-center">
@@ -51,9 +55,9 @@ export default function usersEditRoute() {
           <Form.Label>Email</Form.Label>
           <Form.Control type="email" name="email" defaultValue={email} />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="access_token">
+        <Form.Group className="mb-3" controlId="calendar">
           <Form.Label>Access Token</Form.Label>
-          <Form.Control type="text" name="access_token" defaultValue={access_token} />
+          <Form.Control type="text" name="calendar" defaultValue={calendar} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="password">
           <Form.Label>Password</Form.Label>

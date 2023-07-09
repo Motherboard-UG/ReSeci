@@ -1,3 +1,26 @@
 :root {
+  --raseci-blue: #1d2c42;
+  --raseci-orange: #ff3b10;
+}
 
+.nav-link {
+  color: gray;
+}
+
+.navbar-nav .nav-link:hover {
+  color: white;
+}
+
+.nav-link:hover {
+  color: black;
+  text-decoration: underline;
+  text-decoration-color: var(--raseci-orange);
+}
+
+.btn-primary {
+  background-color: var(--raseci-blue);
+}
+
+.btn-add {
+  background-color: green;
 }
