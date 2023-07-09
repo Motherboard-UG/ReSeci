@@ -4,10 +4,10 @@
 
 walker add_request {
     has email;
-    has message_id;
-    has meeting_duration;
-    has meeting_period;
+    has meeting_duration = "None";
+    has meeting_period = "None";
     has body;
+    has status;
 
 
     root: take -->node::app;
@@ -15,18 +15,14 @@ walker add_request {
     app: take -->node::requests;
 
     requests {
-        if(!email || !message_id  || !meeting_duration || !meeting_period || !body) {
-            report:status = 400 ;
-            report "Missing required argument";
-            disengage;
-        }
-
+  
         spawn here ++> node::_request(
             email = email,
             message_id = message_id,
             meeting_duration = meeting_duration,
             meeting_period = meeting_period,
-            body = body
+            body = body,
+            status = status
         );
 
         report {"success": true , "message":"Successfully added user settings"};
@@ -46,11 +42,35 @@ walker list_request {
     request {
         report {
             "email" : here.email,
-            "message_id" : here.message_id,
             "meeting_duration" : here.meeting_duration,
             "meeting_period" : here.meeting_period,
-            "body" : here.body
+            "body" : here.body,
+            "status" : here.status
         };
     }
+
+}
+
+
+walker get_request{
+    has status;
+
+    root: take -->node::app;
+    app: take -->node::requests;
+
+    requests: take -->node::request(status = status);
+
+    request {
+         report {
+            "email" : here.email,
+            "meeting_duration" : here.meeting_duration,
+            "meeting_period" : here.meeting_period,
+            "body" : here.body,
+            "status" : here.status
+        };
+
+    }
+
+
 
 }

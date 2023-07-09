@@ -7,4 +7,3 @@ node user {
     has password;
     has permission = true;
 }
-

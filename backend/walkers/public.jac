@@ -3,8 +3,21 @@ walker email_trigger {
    has meeting_hours;
    has meeting_duration;
    has payload = {
-      "sender" : "shiw@gmail.com"
-   };
+    "message": {
+        "subject": "Meet for lunch?",
+        "body": {
+            "contentType": "Text",
+            "content": "The new cafeteria is open."
+        },
+        "toRecipients": [
+            {
+                "emailAddress": {
+                    "address": "dominic.braam@gmail.com"
+                }
+            }
+        ]
+    }
+};
    has excluded = [];
    has included = [];
 

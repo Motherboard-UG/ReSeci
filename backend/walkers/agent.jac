@@ -1,5 +1,6 @@
 walker approved_sender {
     has sender_email;
+
     has anchor approved;
 
     root: take -->node::app;
@@ -45,3 +46,6 @@ walker on_exclusion_list {
 
     user: permission = here.permission;
 }
+
+
+
