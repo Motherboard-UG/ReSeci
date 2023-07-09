@@ -57,8 +57,12 @@ function Layout({ children }) {
             <Nav className="me-auto">
               <Link to='/reports' className="nav-link">Reports</Link>
               <NavDropdown title="Staff" id="basic-nav-dropdown">
-                <NavDropdown.Item href="/users">Approved</NavDropdown.Item>
+                <NavDropdown.Item href="/users">Accessible</NavDropdown.Item>
                 <NavDropdown.Item href="/users/excluded">Excluded</NavDropdown.Item>
+              </NavDropdown>
+              <NavDropdown title="Emails" id="basic-nav-dropdown">
+                <NavDropdown.Item href="/emails">Approved</NavDropdown.Item>
+                <NavDropdown.Item href="/emails/blocklist">Blocklist</NavDropdown.Item>
               </NavDropdown>
               <Link to='/settings' className="nav-link">Settings</Link>
               <Form action="/logout" method="post">

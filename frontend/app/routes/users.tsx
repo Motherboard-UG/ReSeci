@@ -23,7 +23,7 @@ export const action = async ({ request }: ActionArgs) => {
       "delete_user",
       { user_id: form_user_id }
     );
-  } else {
+  } else if (form_action == 'exclude_action') {
     await jaseciCall(
       "update_user",
       {
