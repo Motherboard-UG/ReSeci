@@ -37,7 +37,7 @@ walker list_email {
 
     emails {
         if(_status) {
-            take -->node::email(blocked == status);
+            take -->node::email(blocked == blocked);
         }
         else {
             take -->node::email;
