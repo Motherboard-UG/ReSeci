@@ -6,9 +6,9 @@ import {
   LiveReload,
   Outlet,
 } from "@remix-run/react"
-import { Navbar, Nav, NavDropdown, Container, Form, Button } from "react-bootstrap"
-import bootstrapCSS from "bootstrap/dist/css/bootstrap.min.css"
-import globalStylesUrl from '~/styles/global.css'
+import { Navbar, Nav, NavDropdown, Container, Form, Button } from "react-bootstrap";
+import bootstrapCSS from "bootstrap/dist/css/bootstrap.min.css";
+import globalStylesUrl from '~/styles/global.css';
 
 export const links = () => [
   { rel: 'stylesheet', href: bootstrapCSS },
@@ -65,8 +65,9 @@ function Layout({ children }) {
                 <NavDropdown.Item href="/emails/blocklist">Blocklist</NavDropdown.Item>
               </NavDropdown>
               <Link to='/settings' className="nav-link">Settings</Link>
+              <Link to='/logs' className="nav-link">Logs</Link>
               <Form action="/logout" method="post">
-                <Button type="submit" variant="outline-light" className="mt-1" size="sm">
+                <Button type="submit" variant="outline-light" className="mt-1 ms-3" size="sm">
                   Logout
                 </Button>
               </Form>
