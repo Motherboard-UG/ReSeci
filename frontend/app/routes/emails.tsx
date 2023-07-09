@@ -16,10 +16,10 @@ export const action = async ({ request }: ActionArgs) => {
 
   const form_email = formData.get("email");
 
-    await jaseciCall(
-      "block_email",
-      { form_email: form_email }
-    );
+  await jaseciCall(
+    "block_email",
+    { form_email: form_email }
+  );
 
   return redirect("/emails/blocklist");
 };

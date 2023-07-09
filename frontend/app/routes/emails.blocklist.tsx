@@ -5,7 +5,7 @@ import { jaseciCall } from "~/models/http.server";
 
 export const loader = async () => {
   return json({
-      emails: await jaseciCall("list_email",{"status":true}),
+      emails: await jaseciCall("list_email",{"blocked":true}),
   });
 }
 

@@ -10,8 +10,7 @@ export const action = async ({ request }: ActionArgs) => {
   await jaseciCall(
     "add_email",
     {
-      email: form_email,
-      status: false
+      email: form_email
     }
   );
 

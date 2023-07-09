@@ -1,11 +1,11 @@
 import { useLoaderData, Link } from "@remix-run/react";
 import { json } from "@remix-run/node";
-import { Row, Col, Button, ListGroup } from "react-bootstrap";
+import { Row, Col, Button, ListGroup, Form } from "react-bootstrap";
 import { jaseciCall } from "~/models/http.server";
 
 export const loader = async () => {
   return json({
-      emails: await jaseciCall("list_email",{"status":false}),
+      emails: await jaseciCall("list_email",{"blocked":false}),
   });
 }
 
@@ -14,6 +14,12 @@ export default function emailsIndex(){
 
   return (
   <>
+    <Row>
+      <div className="float-end mb-4">
+        <Link to="/emails/new" className="btn btn-primary btn-add" role="button">Add Email</Link>
+      </div>
+    </Row>
+
       <ListGroup>
         {emails.report?.map((email) => (
           <ListGroup.Item>
@@ -22,7 +28,9 @@ export default function emailsIndex(){
                 {email.email}
               </Col>
               <Col>
-                <Button name="btn_action" variant="outline-danger" className="col" type="submit">Block</Button>
+              <Form>
+                <Button name="block_action" variant="outline-danger" className="col" type="submit" value={email.email}>Block</Button>
+              </Form>
               </Col>
          </Row>
           </ListGroup.Item>
