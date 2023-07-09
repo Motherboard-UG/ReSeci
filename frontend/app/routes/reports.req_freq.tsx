@@ -15,11 +15,13 @@ import {
 
 export const loader = async () => {
   return json({
-      persons: await jaseciCall("list_persons",{}),
+      requests: await jaseciCall("list_request",{}),
   });
 }
 
 export default function reportsRequestsFrequency() {
+
+  const {requests} = useLoaderData();
 
   ChartJS.register(
     CategoryScale,
@@ -31,9 +33,7 @@ export default function reportsRequestsFrequency() {
     PointElement
   );
 
-  // const ages:Array<number> = get_ages();
-  // const avg_age:number = get_avg_age(ages);
-  // var graph_data:{ [key:number]:number } = create_graph_data(ages);
+  const graph_data:{ [key:number]:number } = arrangeDataByHour(requests);
   // graph_data = change_labels_from_data(graph_data);
 
   const options = {
@@ -44,28 +44,21 @@ export default function reportsRequestsFrequency() {
       },
       title: {
         display: true,
-        text: 'Request Frequency',
+        text: 'Request Frequency (Today)',
       },
     },
   };
 
   const data = {
-    labels: [1,2,3,4,5],
+    // labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
     datasets: [
       {
         label: "Accepted Requests",
-        data: [23,21,22,31,32],
+        data: graph_data,
         fill: true,
         backgroundColor: "rgba(0, 150, 47, 0.8)",
         borderColor: "rgba(0, 150, 47, 0.8)"
-      },
-      {
-        label: "Blocked Requests",
-        data: [1,3,2,1,1],
-        fill: true,
-        backgroundColor: "rgba(245, 39, 86, 0.8)",
-        borderColor: "rgba(245, 39, 86, 0.8)"
-      },
+      }
     ]
   };
 
@@ -77,4 +70,27 @@ export default function reportsRequestsFrequency() {
       />
     </>
   )
+}
+
+function arrangeDataByHour(requests){
+  var graph_data:{ [key:number]:number } = {};
+
+  requests.report?.forEach( request => {
+      var hour = getHourFromTimestamp(request.timestamp);
+      console.log(hour);
+      if (graph_data[hour] == undefined){
+        graph_data[hour] = 1;
+      } else {
+        graph_data[hour] += 1;
+      }
+    });
+
+  console.log(graph_data);
+
+  return graph_data;
+}
+
+function getHourFromTimestamp(timestamp){
+  const temp = new Date(timestamp);
+  return temp.getHours();
 }
