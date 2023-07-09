@@ -43,8 +43,23 @@ walker on_exclusion_list {
 
     users: take -->node::user(email == email);
 
-    user: permission = here.permission;
+    user {
+        std.log(here);
+        permission = here.permission;
+    }
 }
 
+
+walker get_users_email {
+    has anchor email =[];
+
+    root: take -->node::app;
+
+    app: take -->node::users;
+
+    users: take -->node::user;
+
+    user: email.list::append(here.email);
+}
 
 

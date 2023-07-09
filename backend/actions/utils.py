@@ -16,7 +16,10 @@ def generate_uuid():
 
 @jaseci_action(act_group=["utils"], allow_remote=True)
 def closest_match(word,patterns):
-   return get_close_matches(word, patterns,1,0.9)
-
+    match = get_close_matches(word, patterns,1,0.9)
+    if(match):
+        return match[0]
+    else:
+        return False
 
 

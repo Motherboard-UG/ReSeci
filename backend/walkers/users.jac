@@ -157,3 +157,21 @@ walker list_included_users {
     }
 
 }
+
+
+
+walker get_users_by_email {
+    has email;
+    has anchor return;
+
+    root: take -->node::app;
+
+    app : take -->node::users;
+
+    users: take -->node::user(email == email);
+
+    email {
+        return = here.calendar_link;
+    }
+
+}

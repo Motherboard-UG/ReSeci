@@ -105,23 +105,29 @@ def free_time_slots(meeting_duration:int,meeting_period:int,url:str):
 
 @jaseci_action(act_group=["ics"], allow_remote=True)
 def same_time_slots(slots:list):
-    matches = []
-    first_meeting = slots[0]
-    slots = slots[1:]
-    for i in range(len(first_meeting)):
+    if(len(slots) > 1):
+        matches = []
+        first_meeting = slots[0]
+        slots = slots[1:]
+        for i in range(len(first_meeting)):
 
-        match = first_meeting[i]['start_time']
-        for x in range(slots):
-            for y in range(slots[x]):
-                if(slots[x][y]['start_time'] == match):
-                    matches.append(sloths[x][y])
-    return matches
+            match = first_meeting[i]['start_time']
+            for x in range(slots):
+                for y in range(slots[x]):
+                    if(slots[x][y]['start_time'] == match):
+                        matches.append(sloths[x][y])
+        return matches
+    else:
+        return False
 
+@jaseci_action(act_group=["ics"], allow_remote=True)
+def format_time_slots(meets:list):
+    parsed_meets = []
+    for meet in meets:
+        parsed_meets.append({
+            "start_time" :  meet['start_time'].format('YYYY-MM-DD HH:mm:ss ZZ') ,
+            "end_time" :  meet['start_time'].format('YYYY-MM-DD HH:mm:ss ZZ')
+        })
 
-
-
-
-
-
-
+    return parsed_meets
 

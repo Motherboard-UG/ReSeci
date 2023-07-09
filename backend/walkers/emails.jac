@@ -44,7 +44,6 @@ walker list_email {
 
         }
     }
-
     email {
         report {
             "email" : here.email,
@@ -68,5 +67,24 @@ walker update_email {
         here.blocked = !here.blocked;
      }
 
+
+}
+
+
+walker list_email_alone {
+    has anchor _emails = [];
+     root: take -->node::app;
+
+    app: take -->node::emails;
+
+    emails {
+       take -->node::email;
+    }
+
+    email: {
+
+        _emails.list::append(here.email);
+
+    }
 
 }

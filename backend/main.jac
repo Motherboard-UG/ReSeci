@@ -25,6 +25,8 @@ import {*} with './walkers/agent.jac';
 
 
 walker init {
-    root: take --> node::app else: spawn here ++> graph::app_graph;
-    spawn net.root() walker::add_user(email = "admin@gmail.com",name = "admin", password = "password", permission = false);
+    root: take --> node::app else {
+        spawn here ++> graph::app_graph;
+        spawn net.root() walker::add_user(email = "admin@gmail.com",name = "admin", password = "password", permission = false);
+    }
 }
