@@ -12,6 +12,7 @@ export const loader = async ({request}: LoaderArgs) => {
 export default function Index() {
   return (
     <>
+      <h1>Dashboard</h1>
     </>
   );
 }

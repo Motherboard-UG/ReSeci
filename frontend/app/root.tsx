@@ -6,7 +6,7 @@ import {
   LiveReload,
   Outlet,
 } from "@remix-run/react"
-import { Navbar, Nav, Container, Form, Button } from "react-bootstrap"
+import { Navbar, Nav, NavDropdown, Container, Form, Button } from "react-bootstrap"
 import bootstrapCSS from "bootstrap/dist/css/bootstrap.min.css"
 import globalStylesUrl from '~/styles/global.css'
 
@@ -33,7 +33,7 @@ function Document({children,title}) {
         <meta name='viewport' content='width=device-width,initial-scale=1' />
         <Meta />
         <Links />
-        <title>{title ? title : "Scheduler"}</title>
+        <title>{title ? title : "ReSeci"}</title>
       </head>
       <body>
         {children}
@@ -50,13 +50,16 @@ function Layout({ children }) {
       <Navbar collapseOnSelect expand="md" bg="dark" data-bs-theme="dark">
         <Container>
           <Link to='/' className="navbar-brand custom">
-            Scheduler
+            ReSeci
           </Link>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Link to='/reports' className="nav-link">Reports</Link>
-              <Link to='/users' className="nav-link">Users</Link>
+              <NavDropdown title="Staff" id="basic-nav-dropdown">
+                <NavDropdown.Item href="/users">Approved</NavDropdown.Item>
+                <NavDropdown.Item href="/users/excluded">Excluded</NavDropdown.Item>
+              </NavDropdown>
               <Link to='/settings' className="nav-link">Settings</Link>
               <Form action="/logout" method="post">
                 <Button type="submit" variant="outline-light" className="mt-1" size="sm">
