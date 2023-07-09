@@ -1,11 +1,7 @@
 import { Form, Button } from "react-bootstrap";
-import { ActionArgs, redirect } from "@remix-run/node";
+import { ActionArgs, redirect, json } from "@remix-run/node";
 import { jaseciCall } from "~/models/http.server";
 import { useParams } from "@remix-run/react";
-
-export const loader = async () => {
-  return null;
-}
 
 export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
@@ -41,7 +37,9 @@ export const action = async ({ request }: ActionArgs) => {
 };
 
 export default function usersEditRoute() {
-  const { user_id, name, email, calendar } = useParams();
+  const { user_id } = useParams();
+
+  const user = getUser(user_id);
 
   return (
     <div className="row justify-content-md-center">
@@ -49,15 +47,15 @@ export default function usersEditRoute() {
       <h3 className="mb-4">Edit User</h3>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
-          <Form.Control type="text" name="name" defaultValue={name} />
+          <Form.Control type="text" name="name" defaultValue={user.name} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="email" name="email" defaultValue={email} />
+          <Form.Control type="email" name="email" defaultValue={user.email} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="calendar">
-          <Form.Label>Access Token</Form.Label>
-          <Form.Control type="text" name="calendar" defaultValue={calendar} />
+          <Form.Label>Calendar Link (ics)</Form.Label>
+          <Form.Control type="text" name="calendar" defaultValue={user.calendar} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="password">
           <Form.Label>Password</Form.Label>
@@ -72,4 +70,10 @@ export default function usersEditRoute() {
       </Form>
     </div>
       );
+}
+
+async function getUser(user_id:string){
+  return json({
+      user: await jaseciCall("get_user",{"user_id": user_id}),
+  });
 }

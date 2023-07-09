@@ -5,7 +5,7 @@ import { jaseciCall } from "~/models/http.server";
 
 export const loader = async () => {
   return json({
-      users: await jaseciCall("list_users",{}),
+      users: await jaseciCall("list_included_users",{}),
   });
 }
 
@@ -34,18 +34,18 @@ export default function usersIndex(){
             <td>{user.email}</td>
             <td><a href={user.calendar}>{user.calendar ? "Download" : null}</a></td>
             <td>
-            <Row>
-              <Form method="post">
-                <Form.Control name="user_id" type="hidden" value={user.user_id} />
-                <Form.Control name="name" type="hidden" value={user.name} />
-                <Form.Control name="email" type="hidden" value={user.email} />
-                <Form.Control name="calendar" type="hidden" value={user.calendar} />
-                <Form.Control name="permission" type="hidden" value={user.permission} />
-                <Link to={`/users/edit/${user.user_id}/${user.name}/${user.email}/${user.calendar}`} className="btn btn-primary col me-2" role="button">Edit</Link>
-                <Button name="btn_action" variant="warning" className="col me-2" type="submit" value="exclude_action">Exc</Button>
-                <Button name="btn_action" variant="outline-danger" className="col" type="submit" value="delete_action">Del</Button>
-              </Form>
-            </Row>
+              <Row>
+                <Form method="post">
+                  <Form.Control name="user_id" type="hidden" value={user.user_id} />
+                  <Form.Control name="name" type="hidden" value={user.name} />
+                  <Form.Control name="email" type="hidden" value={user.email} />
+                  <Form.Control name="calendar" type="hidden" value={user.calendar} />
+                  <Form.Control name="permission" type="hidden" value={user.permission} />
+                  <Link to={`/users/edit/${user.user_id}`} className="btn btn-primary col me-2" role="button">Edit</Link>
+                  <Button name="btn_action" variant="warning" className="col me-2" type="submit" value="exclude_action">Exc</Button>
+                  <Button name="btn_action" variant="outline-danger" className="col" type="submit" value="delete_action">Del</Button>
+                </Form>
+              </Row>
             </td>
           </tr>
               ))}
