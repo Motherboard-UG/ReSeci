@@ -15,13 +15,23 @@ export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
 
   const form_user_id = formData.get("user_id");
+  const form_permission = formData.get("permission");
+  const form_action = formData.get("btn_action");
 
-  console.log("id:" + form_user_id);
-
-  await jaseciCall(
-    "delete_user",
-    { user_id: form_user_id }
-  );
+  if (form_action == 'delete_action'){
+    await jaseciCall(
+      "delete_user",
+      { user_id: form_user_id }
+    );
+  } else {
+    await jaseciCall(
+      "update_user",
+      {
+        user_id: form_user_id,
+        permission: !form_permission
+        }
+    );
+  }
 
   return redirect("/users");
 };
@@ -29,7 +39,7 @@ export const action = async ({ request }: ActionArgs) => {
 export default function usersRoute(){
   return (
     <>
-      <h1 className="mb-4">Users</h1>
+      <h1 className="col mb-4">Staff</h1>
       <Outlet />
     </>
       );

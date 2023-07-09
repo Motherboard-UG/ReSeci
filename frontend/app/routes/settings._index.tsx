@@ -1,11 +1,11 @@
 import { useLoaderData } from "@remix-run/react";
-import { ListGroup, Form, Row, Col } from "react-bootstrap";
+import { ListGroup, Form, Row, Col, Button } from "react-bootstrap";
 import { json } from "@remix-run/node";
 import { jaseciCall } from "~/models/http.server";
 
 export const loader = async () => {
   return json({
-      users: await jaseciCall("get_global_settings",{}),
+      settings: await jaseciCall("get_global_settings",{}),
   });
 }
 
@@ -20,7 +20,13 @@ export default function SettingsIndex(){
             <ListGroup.Item>
               <Row>
                 <Col className="m-auto">
-                  {setting.name}
+                  <div className="pb-0">
+                    {setting.name}
+                    <br/>
+                  </div>
+                  <sub className="pt-0">
+                    {setting.description}
+                  </sub>
                 </Col>
                 <Col xs={2}>
                   <Form.Group controlId="daysAhead">
@@ -32,6 +38,9 @@ export default function SettingsIndex(){
           </ListGroup>
               ))}
         </Form>
+        <Button className="mt-4" variant="primary" type="submit">
+          Update
+        </Button>
       </>
       );
 }

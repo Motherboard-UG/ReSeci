@@ -7,7 +7,7 @@ export const action = async ({ request }: ActionArgs) => {
 
   const form_name = formData.get("name");
   const form_email = formData.get("email");
-  const form_access_token = formData.get("access_token");
+  const form_calendar = formData.get("calendar");
   const form_password = formData.get("password");
 
   await jaseciCall(
@@ -15,7 +15,7 @@ export const action = async ({ request }: ActionArgs) => {
     {
       name: form_name,
       email: form_email,
-      access_token: form_access_token,
+      calendar_link: form_calendar,
       password: form_password }
   );
 
@@ -35,9 +35,9 @@ export default function userNewRoute() {
           <Form.Label>Email</Form.Label>
           <Form.Control type="email" name="email" />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="access_token">
-          <Form.Label>Access Token</Form.Label>
-          <Form.Control type="text" name="access_token" />
+        <Form.Group className="mb-3" controlId="calendar">
+          <Form.Label>Calendar Link (ics)</Form.Label>
+          <Form.Control type="text" name="calendar" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="password">
           <Form.Label>Password</Form.Label>
