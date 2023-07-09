@@ -8,6 +8,7 @@ walker add_request {
     has meeting_period = "None";
     has body;
     has status;
+    can date.timestamp;
 
 
     root: take -->node::app;
@@ -18,11 +19,11 @@ walker add_request {
   
         spawn here ++> node::_request(
             email = email,
-            message_id = message_id,
             meeting_duration = meeting_duration,
             meeting_period = meeting_period,
             body = body,
-            status = status
+            status = status,
+            timestamp = date.timestamp_now()
         );
 
         report {"success": true , "message":"Successfully added user settings"};
@@ -33,20 +34,34 @@ walker add_request {
 
 
 walker list_request {
+    has anchor request_details = [];
+
 
     root: take -->node::app;
     app: take -->node::requests;
+    
 
-    requests: take -->node::request;
+    requests: take -->node::_request;
 
-    request {
+    _request {
         report {
             "email" : here.email,
             "meeting_duration" : here.meeting_duration,
             "meeting_period" : here.meeting_period,
             "body" : here.body,
-            "status" : here.status
+            "status" : here.status,
+            "timestamp" : here.timestamp
         };
+
+        request_details.list::append({
+            "email" : here.email,
+            "meeting_duration" : here.meeting_duration,
+            "meeting_period" : here.meeting_period,
+            "body" : here.body,
+            "status" : here.status,
+            "timestamp" : here.timestamp
+        }
+        );
     }
 
 }
@@ -58,15 +73,17 @@ walker get_request{
     root: take -->node::app;
     app: take -->node::requests;
 
-    requests: take -->node::request(status = status);
+    requests: take -->node::_request(status = status);
 
-    request {
+    _request {
          report {
             "email" : here.email,
             "meeting_duration" : here.meeting_duration,
             "meeting_period" : here.meeting_period,
             "body" : here.body,
-            "status" : here.status
+            "status" : here.status,
+            "timestamp" : here.timestamp
+
         };
 
     }

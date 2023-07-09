@@ -47,8 +47,25 @@ walker list_email {
     email {
         report {
             "email" : here.email,
-            "status" : here.status
+            "blocked" : here.blocked
         };
     }
+
+}
+
+
+walker update_email {
+    has email;
+
+    root: take -->node::app;
+
+    app: take -->node::emails;
+
+    emails: take -->node::email(email = email);
+
+    email {
+        here.blocked = !here.blocked;
+     }
+
 
 }

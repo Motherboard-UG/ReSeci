@@ -2,5 +2,6 @@
 requirements.txt
 main.jir
 actions/__pycache__
+actions/.jaseci_logs
 mydatabase
 js.session

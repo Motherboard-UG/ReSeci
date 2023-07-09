@@ -7,5 +7,6 @@ node _request {
     has meeting_period;
     has body;
     has status;
+    has timestamp;
 }
 

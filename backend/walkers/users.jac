@@ -109,7 +109,7 @@ walker get_user {
 
     user {
         report {
-            "user_id" : here.info['jid'],
+            "user_id" : here.info['jid'], 
             "name" : here.name,
             "email" : here.email,
             "calendar" : here.calendar_link,

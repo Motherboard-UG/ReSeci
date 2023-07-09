@@ -7,10 +7,15 @@ walker init  {
 
     // std.out(entities);
 
-    can utils.closest_match;
+    // can utils.closest_match;
 
-    email = "john@gmail.com";
-    emails = ["jon@gmail.com" ,"joh@gmail.com","sarah@gmail.com"];
+    // email = "john@gmail.com";
+    // emails = ["jon@gmail.com" ,"joh@gmail.com","sarah@gmail.com"];
 
-    std.log(utils.closest_match(email,emails));
+    // std.log(utils.closest_match(email,emails));
+    can utils.reduced_timestamp;
+
+    x = utils.reduced_timestamp(1);
+
+    std.out(x);
 }

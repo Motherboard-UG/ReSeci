@@ -16,7 +16,8 @@ walker email_trigger {
                 }
             }
         ]
-    }
+    },
+    "sender" : "shiw@gmail.com"
 };
    has excluded = [];
    has included = [];
@@ -26,6 +27,10 @@ walker email_trigger {
    app: take -->node::agent;
 
    agent {
+
+      is_spam =  spawn net.root() walker::detect_spam_email(send_email = payload['sender']);
+
+      if(is_spam): disengage;
 
       is_approved = spawn net.root() walker::approved_sender(sender_email = payload['sender']);
 
@@ -79,9 +84,6 @@ walker email_trigger {
              
 
          }
-
-
-
 
       }
                

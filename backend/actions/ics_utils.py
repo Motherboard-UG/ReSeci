@@ -3,6 +3,8 @@ import requests
 from ics import Calendar
 import arrow
 
+
+
 # make get request for ics file;
 def get_ics_file(url: str):
     r = requests.get(url, allow_redirects=True)
@@ -90,7 +92,7 @@ def check_for_clashes(time_sloth:dict, event_times:list):
             return False           
 
 
-@jaseci_action(act_group=["utils"], allow_remote=True)
+@jaseci_action(act_group=["ics"], allow_remote=True)
 def free_time_slots(meeting_duration:int,meeting_period:int,url:str):
     ics_text = get_ics_file(url)
     calendar = calendar_object(ics_text)
@@ -101,6 +103,7 @@ def free_time_slots(meeting_duration:int,meeting_period:int,url:str):
 
     return free_time_sloths
 
+@jaseci_action(act_group=["ics"], allow_remote=True)
 def same_time_slots(slots:list)
     matches = []
     first_meeting = slots[0]
