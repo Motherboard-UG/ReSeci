@@ -2,6 +2,7 @@ node agent  {
     can langchain.extract_entities;
     can ics.free_time_slots;
     can ics.same_time_slots;
+    can ics.format_time_slots;
     // determine standarized format for requester 
     //handle improper request sent 
 
@@ -37,11 +38,13 @@ node agent  {
     can get_meetings {
        
         included = visitor.included;
-        meeting_hours = visitor.meeting_hours;
+        meeting_period = visitor.meeting_hours;
         meeting_duration = visitor.meeting_duration;
         time_slots = [];
+        std.log(included.length);
 
         if(included.length > 1){
+            std.log(">1");
             for emails in included {
                 calendar_link = spawn net.root() walker::get_users_by_email(email = email);
                 std.log("calendar lik",calendar_link);
@@ -54,17 +57,20 @@ node agent  {
         }
 
         if(time_slots):
-            visitor.same_time_slots = ics.same_time_slots(time_slots);
+            meets = ics.same_time_slots(time_slots);
+            visitor.same_time_slots = ics.format_time_slots(meets);
 
 
         }
         else {
+            std.log(">==");
+
             calendar_link = spawn net.root() walker::get_users_by_email(email = included[0]);
             std.log("calendar lik",calendar_link);
             if(calendar_link){
                 meets = ics.free_time_slots(meeting_duration,meeting_period,calendar_link);
-                std.log("meets",meets);
-                visitor.same_time_slots = meets;      
+                
+                visitor.same_time_slots = ics.format_time_slots(meets);
             }
 
     }

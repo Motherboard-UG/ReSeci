@@ -170,7 +170,7 @@ walker get_users_by_email {
 
     users: take -->node::user(email == email);
 
-    email {
+    user {
         return = here.calendar_link;
     }
 

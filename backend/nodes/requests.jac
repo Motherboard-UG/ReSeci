@@ -2,7 +2,8 @@ node requests;
 
 
 node _request {
-    has email;
+    has to_email;
+    has from_email;
     has meeting_duration;
     has meeting_period;
     has body;

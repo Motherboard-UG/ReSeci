@@ -3,7 +3,8 @@
 
 
 walker add_request {
-    has email;
+    has to_email;
+    has from_email;
     has meeting_duration = "None";
     has meeting_period = "None";
     has body;
@@ -18,7 +19,8 @@ walker add_request {
     requests {
   
         spawn here ++> node::_request(
-            email = email,
+            to_email = to_email,
+            from_email = from_email,
             meeting_duration = meeting_duration,
             meeting_period = meeting_period,
             body = body,
@@ -47,7 +49,8 @@ walker list_request {
     _request {
         if(isReporting){
             report {
-                "email" : here.email,
+                "to_email" : here.to_email,
+                "from_email" : here.from_email,
                 "meeting_duration" : here.meeting_duration,
                 "meeting_period" : here.meeting_period,
                 "body" : here.body,
@@ -59,7 +62,8 @@ walker list_request {
         }
      
         request_details.list::append({
-            "email" : here.email,
+            "to_email" : here.to_email,
+            "from_email" : here.from_email,
             "meeting_duration" : here.meeting_duration,
             "meeting_period" : here.meeting_period,
             "body" : here.body,
@@ -82,7 +86,8 @@ walker get_request{
 
     _request {
          report {
-            "email" : here.email,
+            "to_email" : here.to_email,
+            "from_email" : here.from_email,
             "meeting_duration" : here.meeting_duration,
             "meeting_period" : here.meeting_period,
             "body" : here.body,

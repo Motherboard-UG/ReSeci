@@ -35,10 +35,10 @@ def get_all_sloths(meeting_duration:int,meeting_period:int):
     time_period = []
     utc = arrow.utcnow()
     #utc  = utc.replace(hour = 9, minute = 0, second = 0)
-    end_time =  utc.shift(hours=+ meeting_period)
+    end_time =  utc.shift(hours= +meeting_period)
 
     # add logic if end time is aftr 9 . kinda important 
-    end_time = end.replace(hour = 9, minute = 0, second = 0)
+    # end_time = end_time.replace(hour = 9, minute = 0, second = 0)
 
     meeting_start_time = utc 
 
@@ -97,9 +97,11 @@ def free_time_slots(meeting_duration:int,meeting_period:int,url:str):
     ics_text = get_ics_file(url)
     calendar = calendar_object(ics_text)
     meetings = retrieve_all_meetings(calendar.events)
-    sloths = get_all_sloths(meeting_duration,meeting_period)
-    cleansed_sloths = remove_after_before_work_time(sloths)
-    free_time_sloths = return_free_time_sloths(cleansed_sloths,meetings)
+    # print(meetings)
+    slots = get_all_sloths(meeting_duration,meeting_period)
+    # print(slots)
+    cleansed_slots = remove_after_before_work_time(slots)
+    free_time_sloths = return_free_time_sloths(cleansed_slots,meetings)
 
     return free_time_sloths
 
