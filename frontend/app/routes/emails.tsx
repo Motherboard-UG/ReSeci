@@ -17,8 +17,8 @@ export const action = async ({ request }: ActionArgs) => {
   const form_email = formData.get("email");
 
   await jaseciCall(
-    "block_email",
-    { form_email: form_email }
+    "update_email",
+    { email: form_email }
   );
 
   return redirect("/emails/blocklist");
