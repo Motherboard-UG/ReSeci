@@ -7,47 +7,35 @@ services:
       - ./backend:/app
     ports:
       - "8000:8000"
+#   traefik:
+#     image: traefik:latest
+#     ports:
+#       - "80:80" # Expose port 80 on the host
+#       - "443:443" # Expose port 443 on the host
+#     volumes:
+#       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+#       - ./letsencrypt:/letsencrypt
+#     networks:
+#       - sbm_network
+#     command:
+#       #- "--log.level=DEBUG"
+#       - "--api.insecure=true"
+#       - "--providers.docker=true"
+#       - "--providers.docker.exposedbydefault=false"
 
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=sbm_network
-      - traefik.http.services.jac_backend.loadbalancer.server.port=8000
-      - traefik.http.routers.jac_backend.rule=Host(`sbm.webble.io`)
-      - traefik.http.routers.jac_backend.tls=true
-      - traefik.http.routers.jac_backend.tls.certresolver=le
-      - traefik.http.routers.jac_backend.entrypoints=websecure
-    networks:
-      - sbm_network
+#       # entrypoints
+#       - "--entrypoints.jac_backend.address=:80"
+#       - "--entrypoints.websecure.address=:443"
 
-  traefik:
-    image: traefik:latest
-    ports:
-      - "80:80" # Expose port 80 on the host
-      - "443:443" # Expose port 443 on the host
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - ./letsencrypt:/letsencrypt
-    networks:
-      - sbm_network
-    command:
-      #- "--log.level=DEBUG"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
+#       # let's encrypt
+#       - "--certificatesresolvers.le.acme.email=admin@sbm.com"
+#       - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+#       - "--certificatesresolvers.le.acme.tlschallenge=true"
 
-      # entrypoints
-      - "--entrypoints.jac_backend.address=:80"
-      - "--entrypoints.websecure.address=:443"
-
-      # let's encrypt
-      - "--certificatesresolvers.le.acme.email=admin@sbm.com"
-      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
-      - "--certificatesresolvers.le.acme.tlschallenge=true"
-
-      # redirects
-      - "--entrypoints.jac_backend.http.redirections.entryPoint.to=websecure"
-      - "--entrypoints.jac_backend.http.redirections.entryPoint.scheme=https"
-      - "--entrypoints.jac_backend.http.redirections.entryPoint.permanent=true"
-networks:
-  sbm_network:
-    driver: bridge
+#       # redirects
+#       - "--entrypoints.jac_backend.http.redirections.entryPoint.to=websecure"
+#       - "--entrypoints.jac_backend.http.redirections.entryPoint.scheme=https"
+#       - "--entrypoints.jac_backend.http.redirections.entryPoint.permanent=true"
+# networks:
+#   sbm_network:
+#     driver: bridge

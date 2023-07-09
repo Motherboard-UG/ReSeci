@@ -37,10 +37,10 @@ walker email_trigger {
          spawn here walker::add_request(to_email = "Spam",from_email =payload['sender'] ,meeting_duration = 0, meeting_period = 0,body = payload['message']['body']['content'],status = false);
          disengage;
       }
-         
+      report "Is not spam";
       # check if user is approved
       is_approved = spawn net.root() walker::approved_sender(sender_email = payload['sender'], blocked = false);
-  
+      report "The sender is approved";
 
       if(!is_approved) {
                spawn net.root() walker::send_email_plain_text(
@@ -62,7 +62,12 @@ walker email_trigger {
                 closest_match.list::append(mail);
          }
 
-         spawn here walker::add_request(to_email = closest_match,from_email =payload['sender'] ,meeting_duration = meeting_duration, meeting_period = meeting_period,body = payload['message']['body']['content'],status = true);
+         report "Meeting duration " + meeting_duration.str ;
+         report "Meeting Period: " + meeting_hours.str + "hours" ;
+         report emails;
+         report closest_match;
+
+         spawn here walker::add_request(to_email = closest_match,from_email =payload['sender'] ,meeting_duration = meeting_duration, meeting_period = meeting_hours,body = payload['message']['body']['content'],status = true);
 
       }
          # find matches for emails sent in and query match if spelt wrong
@@ -80,63 +85,68 @@ walker email_trigger {
             if(excluded){
                #get free meeting slots
                 here::get_meetings;
+
+                report ["Time slots" ,visitor.same_time_slots];
                // modify resposne to include the not included
-                headingone = "<h3>The emails from who we queried</h3>";
+               //  headingone = "<h3>The emails from who we queried</h3>";
 
-               for x in included {
-                  headingone = headingone + "<p>" + x + "</p>";
+               // for x in included {
+               //    headingone = headingone + "<p>" + x + "</p>";
 
-               }
+               // }
 
-               meetings = visitor.same_time_slots;
-               ol = "<h3>These are the times avaliable</h3><ol>";
+               // meetings = visitor.same_time_slots;
+               // ol = "<h3>These are the times avaliable</h3><ol>";
 
-               for meeting in meetings {
-                  ol = ol + "<li>" + meeting['start_time'] + " to " + meeting['end_time'] + '</li>';
+               // for meeting in meetings {
+               //    ol = ol + "<li>" + meeting['start_time'] + " to " + meeting['end_time'] + '</li>';
 
-                }
+               //  }
 
-               ol = ol + "</ol>";
-               headingtwo = "<h3>These emails are not accessible at the moment</h3>";
+               // ol = ol + "</ol>";
+               // headingtwo = "<h3>These emails are not accessible at the moment</h3>";
 
-               for x in included {
-                  headingtwo = headingtwo + "<p>" + x + "</p>";
+               // for x in included {
+               //    headingtwo = headingtwo + "<p>" + x + "</p>";
 
-               }
+               // }
 
-                spawn net.root() walker::send_email_html(
-                  messsage= headingone + ol + headingtwo,
-                  email = payload['sender'],
-                  subject = "Time slots avaliable"
-                  );
+               //  spawn net.root() walker::send_email_html(
+               //    messsage= headingone + ol + headingtwo,
+               //    email = payload['sender'],
+               //    subject = "Time slots avaliable"
+               //    );
                   disengage;
 
             }
             else {
                // get meeting times
-                here::get_meetings;
+                  here::get_meetings;
+                  report ["Time slots" ,visitor.same_time_slots];
 
-               headingone = "<h3>The emails from who we queried</h3>";
+                
 
-               for x in included {
-                  headingone = headingone + "<p>" + x + "</p>";
+               // headingone = "<h3>The emails from who we queried</h3>";
 
-               }
+               // for x in included {
+               //    headingone = headingone + "<p>" + x + "</p>";
 
-               meetings = visitor.same_time_slots;
-               ol = "<h3>These are the times avaliable</h3><ol>";
-               for meeting in meetings {
-                  ol = ol + "<li>" + meeting['start_time'] + " to " + meeting['end_time'] + '</li>';
+               // }
 
-                }
+               // meetings = visitor.same_time_slots;
+               // ol = "<h3>These are the times avaliable</h3><ol>";
+               // for meeting in meetings {
+               //    ol = ol + "<li>" + meeting['start_time'] + " to " + meeting['end_time'] + '</li>';
 
-               ol = ol + "</ol>";
+               //  }
 
-               spawn net.root() walker::send_email_html(
-                  messsage= headingone + ol,
-                  email = payload['sender'],
-                  subject = "Time slots avaliable"
-                  );
+               // ol = ol + "</ol>";
+
+               // spawn net.root() walker::send_email_html(
+               //    messsage= headingone + ol,
+               //    email = payload['sender'],
+               //    subject = "Time slots avaliable"
+               //    );
                   disengage;
 
             }
@@ -144,17 +154,18 @@ walker email_trigger {
          }
          else {
             if(excluded){
-               message = "<h3>You cannot request meeings from the following</h3><ol>";
-               for i = 0 to i < included.length by i+=1 {
-                  message = message + "<li>" + excluded[i] + "</li>";
+               report ["you cannot access these emails" , excluded];
+               // message = "<h3>You cannot request meeings from the following</h3><ol>";
+               // for i = 0 to i < included.length by i+=1 {
+               //    message = message + "<li>" + excluded[i] + "</li>";
 
-               }
-               message = message + "</ol>";
-               spawn net.root() walker::send_email_html(
-                  messsage= message,
-                  email = payload['sender'],
-                  subject = "Unauthorize Access"
-                  );
+               // }
+               // message = message + "</ol>";
+               // spawn net.root() walker::send_email_html(
+               //    messsage= message,
+               //    email = payload['sender'],
+               //    subject = "Unauthorize Access"
+               //    );
                   disengage;
             }
              

@@ -22,7 +22,7 @@ walker detect_spam_email {
 
     for i = 0 to i < requests.length by i+=1 {
 
-        if(requests[i]['email'] == send_email){
+        if(requests[i]['from_email'] == send_email){
             std.log();
             if( requests[i]['timestamp'] > timestamp){
                 std.log("this is highhhh");
