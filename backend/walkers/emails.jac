@@ -28,15 +28,16 @@ walker add_email {
 
 
 walker list_email {
-    has status;
+    has blocked;
+    has _status = false;
 
     root: take -->node::app;
 
     app: take -->node::emails;
 
     emails {
-        if(status) {
-            take -->node::email(status == status);
+        if(_status) {
+            take -->node::email(blocked == status);
         }
         else {
             take -->node::email;
@@ -61,7 +62,7 @@ walker update_email {
 
     app: take -->node::emails;
 
-    emails: take -->node::email(email = email);
+    emails: take -->node::email(email == email);
 
     email {
         here.blocked = !here.blocked;

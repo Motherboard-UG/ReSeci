@@ -1,6 +1,5 @@
 walker approved_sender {
     has sender_email;
-
     has anchor approved;
 
     root: take -->node::app;
@@ -8,7 +7,7 @@ walker approved_sender {
     app: take -->node::emails;
 
     emails {
-        emails = -->node::email(email = email, status == true);
+        emails = -->node::email(email == email,blocked  == false);
         if(emails): approved = true;
         else: approved = false;
     }
@@ -42,7 +41,7 @@ walker on_exclusion_list {
 
     app: take -->node::users;
 
-    users: take -->node::user(email == email):
+    users: take -->node::user(email == email);
 
     user: permission = here.permission;
 }

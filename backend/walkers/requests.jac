@@ -35,6 +35,7 @@ walker add_request {
 
 walker list_request {
     has anchor request_details = [];
+    has isReporting = true;
 
 
     root: take -->node::app;
@@ -44,15 +45,19 @@ walker list_request {
     requests: take -->node::_request;
 
     _request {
-        report {
-            "email" : here.email,
-            "meeting_duration" : here.meeting_duration,
-            "meeting_period" : here.meeting_period,
-            "body" : here.body,
-            "status" : here.status,
-            "timestamp" : here.timestamp
-        };
+        if(isReporting){
+            report {
+                "email" : here.email,
+                "meeting_duration" : here.meeting_duration,
+                "meeting_period" : here.meeting_period,
+                "body" : here.body,
+                "status" : here.status,
+                "timestamp" : here.timestamp
+            };
 
+
+        }
+     
         request_details.list::append({
             "email" : here.email,
             "meeting_duration" : here.meeting_duration,

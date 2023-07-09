@@ -104,7 +104,7 @@ def free_time_slots(meeting_duration:int,meeting_period:int,url:str):
     return free_time_sloths
 
 @jaseci_action(act_group=["ics"], allow_remote=True)
-def same_time_slots(slots:list)
+def same_time_slots(slots:list):
     matches = []
     first_meeting = slots[0]
     slots = slots[1:]
@@ -125,32 +125,3 @@ def same_time_slots(slots:list)
 
 
 
-
-
-
-
-# query all meetings based on 
-
-
-x = get_ics_file("https://outlook.live.com/owa/calendar/5dd44912-d8a8-44d1-927a-15bedeae9eae/ebad0b0e-7dd1-448c-a01e-f56c7671a1d8/cid-8177ED928A8238C2/calendar.ics")
-c = calendar_object(x)
-emeet = retrieve_all_meetings(c.events)
-print(emeet)
-print(len(emeet))
-print("==============================================================")
-
-
-x = get_all_sloths(1,5,[])
-print(x)
-print(len(x))
-
-print("==============================================================")
-z = remove_after_before_work_time(x)
-print(z)
-print(len(z))
-
-print("==============================================================")
-
-
-q = return_free_time_sloths(z,emeet)
-print(q)
