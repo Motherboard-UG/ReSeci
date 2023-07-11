@@ -2,6 +2,7 @@ from jaseci.jsorc.live_actions import jaseci_action
 from dotenv import dotenv_values
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import create_extraction_chain
+import os
 
 
 @jaseci_action(act_group=["langchain"], allow_remote=True)
@@ -9,7 +10,7 @@ def extract_entities(text):
     
     provider = "openai" 
     model_name = "gpt-3.5-turbo-0613" 
-    api_key = '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'
+    api_key = os.environ("OPENAI_TOKEN")
     schema =  {
         "properties" : {
             "person_email" : {"type" : "string"},

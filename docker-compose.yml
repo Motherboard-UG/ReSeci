@@ -1,12 +1,23 @@
 version: "3.9"
 services:
   jac_backend:
-    container_name: sbm_backend
-    build: .
+    container_name: reseci_backend
+    build: ./backend
+    network_mode: host
     volumes:
       - ./backend:/app
     ports:
       - "8000:8000"
+  remix:
+    container_name: reseci_frontend
+    build: ./frontend
+    network_mode: host
+    volumes:
+      - ./frontend/app:/usr/server/app/app
+      - ./frontend/public:/usr/server/app/public
+      - ./frontend/.env:/usr/server/app/.env
+    ports:
+      - "3000:3000"
 #   traefik:
 #     image: traefik:latest
 #     ports:
@@ -36,6 +47,3 @@ services:
 #       - "--entrypoints.jac_backend.http.redirections.entryPoint.to=websecure"
 #       - "--entrypoints.jac_backend.http.redirections.entryPoint.scheme=https"
 #       - "--entrypoints.jac_backend.http.redirections.entryPoint.permanent=true"
-# networks:
-#   sbm_network:
-#     driver: bridge
