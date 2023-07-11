@@ -5,3 +5,4 @@ actions/__pycache__
 actions/.jaseci_logs
 mydatabase
 js.session
+.env

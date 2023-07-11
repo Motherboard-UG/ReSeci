@@ -4,7 +4,7 @@ FROM jaseci/jac-nlp:1.4.0.21
 # Set working directory. / is fine for most scenarios.
 WORKDIR /app
 
-COPY ./backend /app
+COPY ./ ./
 
 # Install any linux dependencies
 ENV DEBIAN_FRONTEND=nointeractive
@@ -24,5 +24,6 @@ RUN jsserv makemigrations base
 RUN jsserv makemigrations
 RUN jsserv migrate base
 RUN jsserv migrate
+EXPOSE 8000
 
 CMD ["jsserv", "runserver", "0.0.0.0:8000"]

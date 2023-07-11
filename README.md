@@ -1,74 +1,45 @@
 # Introduction
 
-This projects has two major components the backend built with jaseci and the frontend with remix. The main component is the backend . Through jaseci we are able to expose many apis that can carry out crud functionality and processes. All these Apis are avaliable to any user with the proper credientials.These apis allow for fine control of the application.
-The main endpoint that will be hit when a email is received can be replicated by hitting the end point 'email_trigger'
+Reseci is a product of the Innovation Challenge 2023 (Hackathon).
+*Commits made after the 9th July, 2023 were not part of the Hackathon.*
 
-# Getting Started
+The concept of the product is to allow only certain emails to schedule meetings with employees of an organisation. There are many endpoints available to carry out CRUD functions ranging from adding new staff to the organisatoin, to changing the application's settings. There is an accompanying frontend that allows users to see statistics and easily change settings within the application.
 
-# How to run the application in docker
+## Getting Started
 
-1. open a terminal in the root of the code directory.
-2. Build the Image for the application by running :
+### Running the application using Docker
 
-```bash
-docker build -t sbm -f Dockerfile .
-```
+1. `docker-compose up`
 
-3. Run the Image. This will start a jaseci server will all the AI modules loaded . You can check localhost:8000 to see if the container is running.
+*Backend will be available at localhost:8000; frontend available at localhost:3000*
 
-`Note : rename the container to sbm by using this command :
+2. Create a Superuser so you can login to the server by running:
 
 ```bash
-docker rename [container_id] sbm
+docker exec -it reseci_backend jsserv createsuperuser
 ```
 
-5. Create a Superuser so you can login to the server by running :
+3. You can then login to the server by running the following command on the docker container and using the credentials created in the previous step:
 
 ```bash
-docker exec -it [container ID] jsserv createsuperuser
+docker exec -it reseci_backend jsctl -m
+$ login http://localhost:8000
 ```
 
-4. You can then log in to the server by running the following command on the docker container :
-
-```bash
-docker exec -it sbm jsctl -m
-```
-
-This will launch a jaseci terminal .
-
-5. Build you Jac Application and log in to your server :
+4. Build your Jac application:
 
 ```bash
 script scripts/build
 script scripts/load
 ```
 
-This will get you server up and ready to make API calls.
+Your backend is now ready to accept requests.
 
-# Run UI in Docker
+## Build and Test
 
-1. cd in to frontend
+All 'walkers' are essentially api endpoints. To make a request to any of the endpoints, make a post request to http://locahost:8000/js/walker_run with your user token generated whenever you login to jsctl in step 3 above.
 
-2. Replace the enviroment variables with your server url and token .
-
-3. Run this to build:
-
-```bash
-docker build -t remix -f remix.DockerFile .
-```
-
-4. Run this to start the container :
-
-```bash
-docker run -p 3000:30000 remix
-```
-
-# Build and Test
-
-all `walkers` are essentially an api. To call any of the apis,
-make a post request to http://locahost:8000/js/walker_run with your user token.
-
-the body of the json body will follow this format :
+The body of the request will follow this format :
 
 ```json
 {
@@ -82,4 +53,5 @@ the body of the json body will follow this format :
 
 # Future work
 
-1.Expose public call back url
+1. Expose public call back url.
+2. Allow settings to have email templating options using variables.
