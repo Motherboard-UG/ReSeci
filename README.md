@@ -1,7 +1,7 @@
 # Introduction
 
 Reseci is a product of the Innovation Challenge 2023 (Hackathon).
-*Commits made after the 9th July, 2023 was not part of the Hackathon.*
+*Commits made after the 9th July, 2023 were not part of the Hackathon.*
 
 The concept of the product is to allow only certain emails to schedule meetings with employees of an organisation. There are many endpoints available to carry out CRUD functions ranging from adding new staff to the organisatoin, to changing the application's settings. There is an accompanying frontend that allows users to see statistics and easily change settings within the application.
 
@@ -9,7 +9,7 @@ The concept of the product is to allow only certain emails to schedule meetings 
 
 ### Running the application using Docker
 
-1. `docker-compose up --build`
+1. `docker-compose up`
 
 *Backend will be available at localhost:8000; frontend available at localhost:3000*
 
