@@ -1,5 +1,5 @@
 # Specify your base image
-FROM jaseci/jac-nlp:1.4.0.21
+FROM jaseci/jaseci:1.4.0.21
 
 # Set working directory. / is fine for most scenarios.
 WORKDIR /app
